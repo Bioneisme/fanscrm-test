@@ -48,3 +48,7 @@ cd frontend && npm run start
 
 swagger: http://localhost:5000/swagger
 
+## Demo
+
+https://github.com/user-attachments/assets/640afac7-6427-4e05-bf5c-ad5a81bd776e
+
