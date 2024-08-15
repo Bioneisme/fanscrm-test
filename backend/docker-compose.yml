@@ -16,3 +16,19 @@ services:
       - './mysql-data:/var/lib/mysql'
     ports:
       - '3306:3306'
+
+  api:
+    restart: always
+    container_name: api
+    env_file:
+      - .env
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    depends_on:
+      - mysql
+    deploy:
+      mode: replicated
+      replicas: 1
+    ports:
+      - ${PORT}:${PORT}
