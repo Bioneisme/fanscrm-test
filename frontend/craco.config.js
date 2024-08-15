@@ -1,3 +1,5 @@
+const CracoEnvPlugin = require('craco-plugin-env')
+
 module.exports = {
     typescript: {
         enableTypeChecking: true,
@@ -5,11 +7,17 @@ module.exports = {
     eslint: {
         enable: true,
         mode: 'extends',
-        configure: (eslintConfig, { env, paths }) => {
+        configure: (eslintConfig, {env, paths}) => {
             return eslintConfig;
         },
-        pluginOptions: (eslintPluginOptions, { env, paths }) => {
+        pluginOptions: (eslintPluginOptions, {env, paths}) => {
             return eslintPluginOptions;
         },
     },
+    plugins: [
+        {
+            plugin: CracoEnvPlugin,
+            options: {}
+        }
+    ]
 };

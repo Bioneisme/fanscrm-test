@@ -1,25 +1,27 @@
 import { Button, Col, Form, Input, Row, message } from 'antd'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../../context/AuthProvider/useAuth'
+import { useAuth } from '../../hooks/useAuth'
 
-export const Login = () => {
+export const Register = () => {
     const auth = useAuth()
-
     const navigate = useNavigate()
 
-    async function onFinish(values: { email: string; password: string }) {
+    async function onFinish(values: {
+        name: string
+        email: string
+        password: string
+    }) {
         try {
-            await auth.authenticate(values.email, values.password)
+            await auth.register(values.name, values.email, values.password)
 
-            navigate('/profile')
-        } catch (error) {
-            message.error('Invalid email or password')
+            navigate('/')
+        } catch (error: any) {
+            message.error(error?.message || 'Something went wrong')
         }
     }
 
     return (
-        // To try Login successful go to https://reqres.in -> LOGIN-SUCCESSFUL and use the "email" and "password"
         <Row
             justify="center"
             align="middle"
@@ -34,6 +36,10 @@ export const Login = () => {
                     wrapperCol={{ span: 16 }}
                     onFinish={onFinish}
                 >
+                    <Form.Item label="Name" name="name">
+                        <Input />
+                    </Form.Item>
+
                     <Form.Item label="Email" name="email">
                         <Input />
                     </Form.Item>
@@ -44,7 +50,16 @@ export const Login = () => {
 
                     <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                         <Button type="primary" htmlType="submit">
-                            Sign In
+                            Register
+                        </Button>
+
+                        <Button
+                            type="link"
+                            onClick={() => {
+                                navigate('/login')
+                            }}
+                        >
+                            Log in
                         </Button>
                     </Form.Item>
                 </Form>

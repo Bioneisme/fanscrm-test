@@ -1,14 +1,11 @@
 import axios from 'axios'
-import { getUserLocalStorage } from '../context/AuthProvider/util'
 
 export const Api = axios.create({
-    baseURL: 'https://reqres.in/api/',
+    baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5000/api/v1/',
 })
 
 Api.interceptors.request.use(
     (config) => {
-        const user = getUserLocalStorage()
-
         return config
     },
     (error) => {

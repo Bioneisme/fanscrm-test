@@ -1,8 +1,9 @@
-import { useState } from 'react'
-import { AuthProvider } from './context/AuthProvider'
+import { AuthProvider } from './features/auth/context/AuthProvider'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { ProtectedLayout } from './components/ProtectedLayout'
-import { Login } from './components/Login'
+import { ProtectedLayout } from './components/layout/ProtectedLayout'
+import { Login } from './features/auth/components/Login'
+import { Register } from './features/auth/components/Register'
+import {Profile} from "./features/profile/components/Profile";
 
 function App() {
     return (
@@ -10,15 +11,16 @@ function App() {
             <BrowserRouter>
                 <Routes>
                     <Route
-                        path="/profile"
+                        path="/"
                         element={
                             <ProtectedLayout>
-                                <h2>Hello,this is the profile component</h2>
+                                <Profile/>
                             </ProtectedLayout>
                         }
                     />
 
                     <Route path="/login" element={<Login />}></Route>
+                    <Route path="/register" element={<Register />}></Route>
                 </Routes>
             </BrowserRouter>
         </AuthProvider>
