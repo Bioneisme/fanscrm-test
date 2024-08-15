@@ -15,7 +15,7 @@ import { AuthModule } from './modules/auth/auth.module';
         NODE_ENV: Joi.string()
           .valid('development', 'production', 'test')
           .default('development'),
-        PORT: Joi.number().default(3000),
+        PORT: Joi.number().default(5000),
         JWT_TOKEN_SECRET: Joi.string().required(),
         JWT_TOKEN_EXPIRATION: Joi.string().default('3600s'),
       }),
